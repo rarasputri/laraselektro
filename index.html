@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laras Elektro – Servis Elektronik Profesional</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #0A2463;
+      --royal:   #1565C0;
+      --sky:     #42A5F5;
+      --pale:    #E3F2FD;
+      --ice:     #F0F7FF;
+      --white:   #FFFFFF;
+      --gray:    #6B7A99;
+      --dark:    #0D1B3E;
+      --shadow:  0 4px 24px rgba(10,36,99,0.12);
+      --shadow-lg: 0 12px 48px rgba(10,36,99,0.18);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--navy);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      background: rgba(10,36,99,0.96);
+      backdrop-filter: blur(12px);
+      padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 68px;
+      border-bottom: 1px solid rgba(66,165,245,0.2);
+      transition: background 0.3s;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo .logo-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--sky), var(--royal));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: white;
+      box-shadow: 0 0 14px rgba(66,165,245,0.5);
+    }
+    .nav-logo span {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 1.2rem;
+      color: white; letter-spacing: 0.5px;
+    }
+    .nav-logo span em { color: var(--sky); font-style: normal; }
+
+    .nav-links {
+      list-style: none; display: flex; gap: 32px;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.8); text-decoration: none;
+      font-size: 0.9rem; font-weight: 500;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+      height: 2px; background: var(--sky); border-radius: 2px;
+      transform: scaleX(0); transition: transform 0.25s;
+    }
+    .nav-links a:hover { color: var(--sky); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--sky), var(--royal));
+      color: white !important; padding: 9px 22px; border-radius: 8px;
+      font-weight: 600 !important; transition: opacity 0.2s, transform 0.2s !important;
+    }
+    .nav-cta:hover { opacity: 0.9; transform: translateY(-1px); }
+    .nav-cta::after { display: none !important; }
+
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px; z-index: 1000;
+      position: relative;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: white; border-radius: 2px; transition: 0.3s;
+    }
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, var(--dark) 0%, var(--navy) 50%, #0D3A8C 100%);
+      position: relative; overflow: hidden;
+      display: flex; align-items: center;
+      padding: 100px 5% 140px;
+    }
+
+    /* Circuit pattern SVG background */
+    .hero-circuit {
+      position: absolute; inset: 0;
+      opacity: 0.08;
+      background-image:
+        linear-gradient(rgba(66,165,245,0.6) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(66,165,245,0.6) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    /* Animated glow orbs */
+    .hero-orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(80px); pointer-events: none;
+    }
+    .orb-1 {
+      width: 480px; height: 480px;
+      background: radial-gradient(circle, rgba(66,165,245,0.25), transparent 70%);
+      top: -100px; right: -60px;
+      animation: float 8s ease-in-out infinite;
+    }
+    .orb-2 {
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(21,101,192,0.4), transparent 70%);
+      bottom: 60px; right: 200px;
+      animation: float 10s ease-in-out infinite reverse;
+    }
+    .orb-3 {
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(66,165,245,0.3), transparent 70%);
+      bottom: 120px; left: 40px;
+      animation: float 7s ease-in-out infinite 1s;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50%       { transform: translateY(-24px) scale(1.05); }
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 680px;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(66,165,245,0.15);
+      border: 1px solid rgba(66,165,245,0.35);
+      color: var(--sky); border-radius: 50px;
+      padding: 6px 16px; font-size: 0.8rem; font-weight: 500;
+      margin-bottom: 24px;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-badge i { font-size: 0.75rem; }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 800; line-height: 1.1;
+      color: white; margin-bottom: 24px;
+      animation: fadeUp 0.6s ease 0.1s both;
+    }
+    .hero h1 .accent { color: var(--sky); }
+
+    .hero p {
+      font-size: 1.1rem; line-height: 1.7;
+      color: rgba(255,255,255,0.72);
+      max-width: 520px; margin-bottom: 40px;
+      animation: fadeUp 0.6s ease 0.2s both;
+    }
+
+    .hero-actions {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      animation: fadeUp 0.6s ease 0.3s both;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--sky) 0%, var(--royal) 100%);
+      color: white; padding: 14px 32px; border-radius: 10px;
+      font-weight: 600; font-size: 1rem; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+      box-shadow: 0 6px 24px rgba(66,165,245,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(66,165,245,0.55);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: white; padding: 14px 32px; border-radius: 10px;
+      font-weight: 600; font-size: 1rem; text-decoration: none;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-outline:hover {
+      border-color: var(--sky);
+      background: rgba(66,165,245,0.08);
+    }
+
+    .hero-stats {
+      position: absolute; bottom: 40px; left: 5%; right: 5%;
+      display: flex; gap: 48px;
+      animation: fadeUp 0.6s ease 0.4s both;
+      z-index: 2;
+    }
+    .stat-item { text-align: left; }
+    .stat-item .num {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.9rem; font-weight: 800; color: white;
+    }
+    .stat-item .num span { color: var(--sky); }
+    .stat-item .label {
+      font-size: 0.8rem; color: rgba(255,255,255,0.55); margin-top: 2px;
+    }
+
+    .hero-visual {
+      position: absolute; right: 5%; bottom: 0; top: 68px;
+      width: 42%; display: flex; align-items: center; justify-content: center;
+      z-index: 1;
+    }
+    .hero-card-group {
+      position: relative; width: 100%; max-width: 420px;
+    }
+    .floating-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(66,165,245,0.2);
+      border-radius: 16px; padding: 20px 24px;
+      backdrop-filter: blur(16px);
+      color: white;
+    }
+    .fc-main {
+      position: relative; z-index: 2;
+      animation: float 6s ease-in-out infinite;
+    }
+    .fc-icon-row {
+      display: flex; gap: 12px; margin-bottom: 16px;
+    }
+    .fc-icon {
+      width: 46px; height: 46px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .fc-icon.blue { background: rgba(66,165,245,0.2); color: var(--sky); }
+    .fc-icon.navy { background: rgba(21,101,192,0.3); color: #90CAF9; }
+    .fc-icon.light { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); }
+    .fc-main h3 {
+      font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .fc-main p { font-size: 0.82rem; color: rgba(255,255,255,0.6); line-height: 1.5; }
+
+    .fc-small {
+      position: absolute; left: -36px; bottom: -28px;
+      width: 200px;
+      animation: float 8s ease-in-out infinite 2s;
+    }
+    .fc-small .tag {
+      font-size: 0.75rem; font-weight: 600;
+      color: var(--sky); margin-bottom: 4px;
+    }
+    .fc-small .value {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.4rem; font-weight: 800; color: white;
+    }
+
+    .fc-rating {
+      position: absolute; right: -24px; top: -24px;
+      width: 160px;
+      animation: float 7s ease-in-out infinite 1s;
+    }
+    .stars { color: #FFC107; font-size: 0.85rem; letter-spacing: 1px; margin-bottom: 4px; }
+    .fc-rating .label { font-size: 0.75rem; color: rgba(255,255,255,0.6); }
+    .fc-rating .name { font-size: 0.9rem; font-weight: 600; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 96px 5%; }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--royal); font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section-label::before {
+      content: ''; width: 24px; height: 2px; background: var(--sky); border-radius: 2px;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 800; line-height: 1.2; margin-bottom: 16px;
+      color: var(--navy);
+    }
+    .section-title .accent { color: var(--royal); }
+    .section-desc {
+      font-size: 1rem; color: var(--gray);
+      line-height: 1.7; max-width: 540px;
+    }
+    .text-center { text-align: center; }
+    .text-center .section-label { justify-content: center; }
+    .text-center .section-label::before { display: none; }
+    .text-center .section-desc { margin: 0 auto; }
+
+    /* ── LAYANAN ── */
+    .services { background: var(--ice); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px; margin-top: 56px;
+    }
+    .service-card {
+      background: var(--white);
+      border: 1px solid rgba(10,36,99,0.08);
+      border-radius: 18px; padding: 32px 28px;
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+      position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--sky), var(--royal));
+      transform: scaleX(0); transition: transform 0.3s;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(66,165,245,0.2);
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+    .svc-icon {
+      width: 56px; height: 56px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin-bottom: 20px;
+      background: var(--pale);
+      color: var(--royal);
+      transition: background 0.3s, color 0.3s;
+    }
+    .service-card:hover .svc-icon {
+      background: var(--royal); color: white;
+    }
+    .svc-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem; font-weight: 700;
+      margin-bottom: 10px; color: var(--navy);
+    }
+    .svc-desc { font-size: 0.88rem; color: var(--gray); line-height: 1.65; }
+    .svc-price {
+      display: inline-block; margin-top: 18px;
+      font-size: 0.82rem; font-weight: 600;
+      color: var(--royal); background: var(--pale);
+      padding: 4px 12px; border-radius: 20px;
+    }
+
+    /* ── KEUNGGULAN ── */
+    .features { background: var(--white); }
+    .features-wrap {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: center; margin-top: 20px;
+    }
+    .features-visual {
+      position: relative;
+    }
+    .feat-img-bg {
+      width: 100%; padding-bottom: 100%;
+      border-radius: 24px;
+      background: linear-gradient(135deg, var(--pale) 0%, var(--pale) 100%);
+      position: relative; overflow: hidden;
+    }
+    .feat-img-bg .center-icon {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 7rem; color: var(--royal); opacity: 0.12;
+    }
+    .feat-img-bg .inner-ring {
+      position: absolute; inset: 20%;
+      border: 2px dashed rgba(21,101,192,0.2);
+      border-radius: 50%;
+      animation: spin 18s linear infinite;
+    }
+    .feat-img-bg .inner-ring-2 {
+      position: absolute; inset: 30%;
+      border: 2px solid rgba(66,165,245,0.25);
+      border-radius: 50%;
+      animation: spin 12s linear infinite reverse;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .feat-badge-wrap {
+      position: absolute; display: flex; flex-direction: column; gap: 14px;
+    }
+    .feat-badge-wrap.right { right: -24px; top: 20%; }
+    .feat-badge-wrap.left  { left: -24px; bottom: 20%; }
+    .feat-badge {
+      background: white;
+      border: 1px solid rgba(10,36,99,0.1);
+      border-radius: 12px; padding: 12px 16px;
+      display: flex; align-items: center; gap: 10px;
+      box-shadow: var(--shadow); white-space: nowrap;
+    }
+    .feat-badge i { font-size: 1.1rem; color: var(--royal); }
+    .feat-badge .fb-text { font-size: 0.82rem; }
+    .feat-badge .fb-text strong { display: block; font-weight: 600; color: var(--navy); }
+    .feat-badge .fb-text span { color: var(--gray); font-size: 0.76rem; }
+
+    .features-list { display: flex; flex-direction: column; gap: 28px; }
+    .feat-item {
+      display: flex; gap: 18px; align-items: flex-start;
+      padding: 20px 22px; border-radius: 14px;
+      border: 1px solid transparent;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .feat-item:hover {
+      border-color: var(--pale);
+      background: var(--ice);
+    }
+    .feat-num {
+      width: 42px; height: 42px; border-radius: 10px;
+      background: var(--pale); color: var(--royal);
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .feat-item h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.98rem; font-weight: 700; margin-bottom: 6px;
+    }
+    .feat-item p { font-size: 0.87rem; color: var(--gray); line-height: 1.6; }
+
+    /* ── PROSES ── */
+    .process { background: var(--navy); padding: 96px 5%; }
+    .process .section-title { color: white; }
+    .process .section-desc { color: rgba(255,255,255,0.6); }
+    .process .section-label { color: var(--sky); }
+    .process-steps {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0; margin-top: 64px; position: relative;
+    }
+    .process-steps::before {
+      content: ''; position: absolute;
+      top: 28px; left: 14%; right: 14%;
+      height: 2px; background: linear-gradient(90deg, var(--sky), var(--royal));
+      opacity: 0.3;
+    }
+    .step-item { text-align: center; padding: 0 16px; position: relative; }
+    .step-dot {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--royal);
+      border: 3px solid rgba(66,165,245,0.4);
+      color: white; font-family: 'Syne', sans-serif;
+      font-size: 1.1rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      position: relative; z-index: 1;
+      transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+    .step-item:hover .step-dot {
+      background: var(--sky); border-color: var(--sky);
+      box-shadow: 0 0 24px rgba(66,165,245,0.5);
+    }
+    .step-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.95rem; font-weight: 700;
+      color: white; margin-bottom: 8px;
+    }
+    .step-desc { font-size: 0.82rem; color: rgba(255,255,255,0.55); line-height: 1.5; }
+
+    /* ── TESTIMONI ── */
+    .testimonials { background: var(--ice); }
+    .testi-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px; margin-top: 56px;
+    }
+    .testi-card {
+      background: white; border-radius: 18px; padding: 28px 26px;
+      border: 1px solid rgba(10,36,99,0.07);
+      box-shadow: 0 2px 16px rgba(10,36,99,0.06);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .testi-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .testi-stars { color: #FFC107; font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 14px; }
+    .testi-text {
+      font-size: 0.9rem; color: #344563; line-height: 1.7;
+      margin-bottom: 20px; font-style: italic;
+    }
+    .testi-author { display: flex; align-items: center; gap: 12px; }
+    .testi-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--sky), var(--royal));
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-weight: 700; font-size: 1rem;
+    }
+    .testi-name { font-weight: 600; font-size: 0.9rem; color: var(--navy); }
+    .testi-loc { font-size: 0.78rem; color: var(--gray); }
+
+    /* ── CTA BAND ── */
+    .cta-band {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--royal) 100%);
+      padding: 80px 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 40px;
+    }
+    .cta-band h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800; color: white;
+    }
+    .cta-band h2 em {
+      font-style: normal; color: var(--sky);
+    }
+    .cta-band p {
+      color: rgba(255,255,255,0.65); margin-top: 8px; font-size: 0.95rem;
+    }
+    .cta-band .btn-primary {
+      background: white;
+      color: var(--royal);
+      box-shadow: 0 6px 24px rgba(255,255,255,0.2);
+      flex-shrink: 0;
+    }
+    .cta-band .btn-primary:hover {
+      background: var(--ice);
+      box-shadow: 0 10px 32px rgba(255,255,255,0.3);
+    }
+
+    /* ── KONTAK ── */
+    .contact { background: white; }
+    .contact-wrap {
+      display: grid; grid-template-columns: 1fr 1.2fr;
+      gap: 64px; align-items: start; margin-top: 48px;
+    }
+    .contact-info { display: flex; flex-direction: column; gap: 28px; }
+    .contact-item {
+      display: flex; gap: 16px; align-items: flex-start;
+    }
+    .ci-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: var(--pale); color: var(--royal);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .ci-label { font-size: 0.8rem; color: var(--gray); margin-bottom: 2px; }
+    .ci-value { font-weight: 600; color: var(--navy); }
+
+    .contact-form {
+      background: var(--ice); border-radius: 20px;
+      padding: 36px 32px;
+      border: 1px solid rgba(10,36,99,0.08);
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    .form-group label { font-size: 0.82rem; font-weight: 600; color: var(--navy); }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 11px 16px; border-radius: 10px;
+      border: 1.5px solid rgba(10,36,99,0.12);
+      background: white; color: var(--navy);
+      font-family: 'Inter', sans-serif; font-size: 0.9rem;
+      outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--sky);
+      box-shadow: 0 0 0 3px rgba(66,165,245,0.15);
+    }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-submit {
+      width: 100%; padding: 14px;
+      background: linear-gradient(135deg, var(--sky), var(--royal));
+      color: white; border: none; border-radius: 10px;
+      font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700;
+      cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 6px 20px rgba(21,101,192,0.35);
+    }
+    .form-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(21,101,192,0.45);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      padding: 64px 5% 32px;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr;
+      gap: 48px; margin-bottom: 48px;
+    }
+    .footer-brand p {
+      font-size: 0.88rem; color: rgba(255,255,255,0.5);
+      line-height: 1.7; margin-top: 14px; max-width: 260px;
+    }
+    .footer-brand .social-links {
+      display: flex; gap: 10px; margin-top: 20px;
+    }
+    .social-links a {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.6); text-decoration: none;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; transition: background 0.2s, color 0.2s;
+    }
+    .social-links a:hover { background: var(--sky); color: white; }
+    .footer-col h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.9rem; font-weight: 700; color: white;
+      margin-bottom: 18px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a {
+      text-decoration: none; color: rgba(255,255,255,0.5);
+      font-size: 0.86rem; transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: var(--sky); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom p {
+      font-size: 0.82rem; color: rgba(255,255,255,0.35);
+    }
+    .footer-bottom span { color: var(--sky); }
+
+    /* ── WA FLOAT ── */
+    .wa-float {
+      position: fixed; bottom: 28px; right: 28px; z-index: 999;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: #25D366;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 1.6rem; text-decoration: none;
+      box-shadow: 0 6px 20px rgba(37,211,102,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: pulse-wa 3s ease infinite;
+    }
+    .wa-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 28px rgba(37,211,102,0.55);
+    }
+    @keyframes pulse-wa {
+      0%, 100% { box-shadow: 0 6px 20px rgba(37,211,102,0.4); }
+      50%       { box-shadow: 0 6px 32px rgba(37,211,102,0.65), 0 0 0 12px rgba(37,211,102,0.08); }
+    }
+
+    /* ── MOBILE MENU ── */
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; z-index: 998;
+      background: var(--dark);
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 32px;
+      opacity: 0; transition: opacity 0.3s ease;
+    }
+    .mobile-menu.open { display: flex; opacity: 1; }
+    .mobile-menu a {
+      color: white; text-decoration: none;
+      font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 700;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--sky); }
+
+      /* ── MAPS ── */
+      .map-section {
+      width: 100%; height: 380px;
+      position: relative; overflow: hidden;
+      border-top: 4px solid var(--royal);
+    }
+    .map-section iframe {
+      width: 100%; height: 100%; border: 0; display: block;
+      filter: grayscale(8%) contrast(1.05);
+    }
+    .map-overlay-card {
+      position: absolute; top: 24px; left: 24px; z-index: 2;
+      background: white; border-radius: 14px;
+      padding: 18px 22px; box-shadow: var(--shadow-lg);
+      display: flex; align-items: center; gap: 14px;
+      max-width: 320px;
+    }
+    .map-overlay-card .ci-icon { flex-shrink: 0; }
+    .map-overlay-card .ci-label { font-size: 0.78rem; }
+    .map-overlay-card .ci-value { font-size: 0.88rem; line-height: 1.5; }
+    .map-overlay-card a {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 8px; font-size: 0.78rem; font-weight: 600;
+      color: var(--royal); text-decoration: none;
+    }
+    .map-overlay-card a:hover { color: var(--sky); }
+ 
+    @media (max-width: 768px) {
+      .map-section { height: 320px; }
+      .map-overlay-card {
+        left: 16px; right: 16px; top: 16px; max-width: 100%;
+        padding: 14px 16px;
+      }
+    }
+    @media (max-width: 480px) {
+      .map-section { height: 280px; }
+      .map-overlay-card { flex-direction: column; align-items: flex-start; gap: 8px; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .hero-visual { display: none; }
+      .features-wrap { grid-template-columns: 1fr; }
+      .features-visual { max-width: 400px; margin: 0 auto; }
+      .process-steps { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+      .process-steps::before { display: none; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      section { padding: 64px 6%; }
+
+      /* Navbar */
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .nav-logo span { font-size: 1.05rem; }
+
+      /* Hero */
+      .hero { padding: 90px 6% 130px; min-height: auto; }
+      .hero-content { max-width: 100%; }
+      .hero h1 { font-size: clamp(2rem, 8vw, 2.6rem); }
+      .hero p { font-size: 1rem; max-width: 100%; }
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .hero-actions a { justify-content: center; }
+      .hero-stats {
+        position: static; margin-top: 48px;
+        flex-wrap: wrap; gap: 24px 32px; justify-content: space-between;
+      }
+      .stat-item .num { font-size: 1.6rem; }
+
+      /* Sections */
+      .section-title { font-size: clamp(1.6rem, 6vw, 2.1rem); }
+      .section-desc { font-size: 0.92rem; }
+
+      /* Services */
+      .services-grid { grid-template-columns: 1fr; gap: 18px; margin-top: 40px; }
+      .service-card { padding: 26px 22px; }
+
+      /* Features */
+      .features-wrap { gap: 56px; }
+      .features-visual { max-width: 320px; }
+      .feat-badge-wrap.right { right: -8px; }
+      .feat-badge-wrap.left { left: -8px; }
+      .feat-badge { padding: 10px 14px; }
+      .feat-badge .fb-text strong { font-size: 0.82rem; }
+      .feat-badge .fb-text span { font-size: 0.7rem; }
+      .feat-item { padding: 16px 16px; gap: 14px; }
+
+      /* Process */
+      .process-steps { grid-template-columns: 1fr 1fr; gap: 36px 24px; margin-top: 48px; }
+      .step-dot { width: 48px; height: 48px; font-size: 1rem; }
+      .step-title { font-size: 0.88rem; }
+      .step-desc { font-size: 0.78rem; }
+
+      /* Testimonials */
+      .testi-grid { grid-template-columns: 1fr; gap: 18px; margin-top: 40px; }
+
+      /* CTA band */
+      .cta-band {
+        flex-direction: column; text-align: center;
+        padding: 56px 6%; gap: 24px;
+      }
+      .cta-band .btn-primary { width: 100%; justify-content: center; }
+
+      /* Contact */
+      .contact-wrap { grid-template-columns: 1fr; gap: 40px; margin-top: 36px; }
+      .form-row { grid-template-columns: 1fr; gap: 0; }
+      .contact-form { padding: 28px 22px; }
+      .contact-item { gap: 14px; }
+
+      /* Footer */
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px 24px; margin-bottom: 36px; }
+      .footer-brand { grid-column: 1 / -1; }
+      .footer-brand p { max-width: 100%; }
+
+      /* WhatsApp float */
+      .wa-float { width: 50px; height: 50px; font-size: 1.4rem; bottom: 20px; right: 20px; }
+    }
+
+    @media (max-width: 480px) {
+      section { padding: 56px 6%; }
+      .hero { padding: 84px 6% 110px; }
+      .hero-badge { font-size: 0.74rem; padding: 5px 12px; }
+      .hero h1 { font-size: 1.9rem; line-height: 1.18; }
+      .hero p { font-size: 0.92rem; line-height: 1.6; margin-bottom: 32px; }
+      .btn-primary, .btn-outline { padding: 13px 24px; font-size: 0.92rem; }
+
+      .hero-stats { gap: 16px 24px; }
+      .stat-item .num { font-size: 1.35rem; }
+      .stat-item .label { font-size: 0.72rem; }
+
+      .process-steps { grid-template-columns: 1fr; gap: 28px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; text-align: center; gap: 8px; }
+
+      .testi-card, .service-card { padding: 22px 18px; }
+      .svc-icon { width: 48px; height: 48px; font-size: 1.3rem; }
+
+      .feat-badge-wrap.right, .feat-badge-wrap.left { position: static; margin-top: 12px; }
+      .feat-badge-wrap.left { margin-bottom: 12px; }
+      .features-visual { display: flex; flex-direction: column; max-width: 100%; }
+      .feat-img-bg { max-width: 260px; margin: 0 auto; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <div class="logo-icon"><i class="fa-solid fa-bolt"></i></div>
+    <span>Laras <em>Elektro</em></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#layanan">Layanan</a></li>
+    <li><a href="#keunggulan">Keunggulan</a></li>
+    <li><a href="#proses">Proses</a></li>
+    <li><a href="#testimoni">Testimoni</a></li>
+    <li><a href="#kontak" class="nav-cta">Hubungi Kami</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#layanan" onclick="toggleMenu()">Layanan</a>
+  <a href="#keunggulan" onclick="toggleMenu()">Keunggulan</a>
+  <a href="#proses" onclick="toggleMenu()">Proses</a>
+  <a href="#testimoni" onclick="toggleMenu()">Testimoni</a>
+  <a href="#kontak" onclick="toggleMenu()">Kontak</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-circuit"></div>
+  <div class="hero-orb orb-1"></div>
+  <div class="hero-orb orb-2"></div>
+  <div class="hero-orb orb-3"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <i class="fa-solid fa-circle-check"></i>
+      Terpercaya Sejak 2008 · Bergaransi
+    </div>
+    <h1>Servis Elektronik<br><span class="accent">Profesional & Cepat</span></h1>
+    <p>Laras Elektro hadir sebagai solusi servis elektronik terpercaya. TV, AC, kulkas, mesin cuci, dan perangkat elektronik Anda ditangani oleh teknisi berpengalaman dengan garansi pengerjaan.</p>
+    <div class="hero-actions">
+      <a href="#kontak" class="btn-primary">
+        <i class="fa-solid fa-wrench"></i> Servis Sekarang
+      </a>
+      <a href="#layanan" class="btn-outline">
+        <i class="fa-solid fa-list"></i> Lihat Layanan
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-card-group">
+      <div class="floating-card fc-rating">
+        <div class="stars">★★★★★</div>
+        <div class="name">Pelanggan Puas</div>
+        <div class="label">Rating 4.9/5 dari 2.000+ ulasan</div>
+      </div>
+      <div class="floating-card fc-main">
+        <div class="fc-icon-row">
+          <div class="fc-icon blue"><i class="fa-solid fa-tv"></i></div>
+          <div class="fc-icon navy"><i class="fa-solid fa-snowflake"></i></div>
+          <div class="fc-icon light"><i class="fa-solid fa-blender"></i></div>
+        </div>
+        <h3>Semua Elektronik Rumah Tangga</h3>
+        <p>TV, AC, kulkas, mesin cuci, dan semua perangkat elektronik ditangani oleh teknisi bersertifikat.</p>
+      </div>
+      <div class="floating-card fc-small">
+        <div class="tag">⚡ Respon Cepat</div>
+        <div class="value">< 2 Jam</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="num">15<span>+</span></div>
+      <div class="label">Tahun Pengalaman</div>
+    </div>
+    <div class="stat-item">
+      <div class="num">5.000<span>+</span></div>
+      <div class="label">Perangkat Diperbaiki</div>
+    </div>
+    <div class="stat-item">
+      <div class="num">98<span>%</span></div>
+      <div class="label">Tingkat Kepuasan</div>
+    </div>
+  </div>
+</section>
+
+<!-- LAYANAN -->
+<section class="services" id="layanan">
+  <div class="text-center">
+    <div class="section-label">Layanan Kami</div>
+    <h2 class="section-title">Apa yang Bisa Kami <span class="accent">Perbaiki?</span></h2>
+    <p class="section-desc">Kami menangani berbagai jenis perangkat elektronik dengan standar kualitas tinggi dan suku cadang asli bergaransi.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="svc-icon"><i class="fa-solid fa-tv"></i></div>
+      <div class="svc-title">Servis Televisi</div>
+      <p class="svc-desc">LED, LCD, OLED, Smart TV semua merek. Penggantian panel, backlight, mainboard, dan kerusakan gambar lainnya.</p>
+      <span class="svc-price">Mulai Rp 50.000</span>
+    </div>
+    <div class="service-card">
+      <div class="svc-icon"><i class="fa-solid fa-snowflake"></i></div>
+      <div class="svc-title">Servis AC</div>
+      <p class="svc-desc">Cuci AC, isi freon, ganti kompresor, service PCB, AC tidak dingin, bocor, hingga bunyi berisik.</p>
+      <span class="svc-price">Mulai Rp 80.000</span>
+    </div>
+    <div class="service-card">
+      <div class="svc-icon"><i class="fa-solid fa-temperature-low"></i></div>
+      <div class="svc-title">Servis Kulkas</div>
+      <p class="svc-desc">Kulkas tidak dingin, bocor, berbunyi, ganti thermostat, kompresor, atau kerusakan freezer.</p>
+      <span class="svc-price">Mulai Rp 60.000</span>
+    </div>
+    <div class="service-card">
+      <div class="svc-icon"><i class="fa-solid fa-rotate"></i></div>
+      <div class="svc-title">Servis Mesin Cuci</div>
+      <p class="svc-desc">Mesin cuci tidak berputar, bocor, tidak menguras, ganti timer, motor, atau PCB.</p>
+      <span class="svc-price">Mulai Rp 70.000</span>
+    </div>
+    <div class="service-card">
+      <div class="svc-icon"><i class="fa-solid fa-bolt"></i></div>
+      <div class="svc-title">Servis Pompa Air</div>
+      <p class="svc-desc">Pompa air tidak naik, tidak bertenaga, ganti dinamo, kapasitor, atau perbaikan instalasi pipa.</p>
+      <span class="svc-price">Mulai Rp 80.000</span>
+    </div>
+    <div class="service-card">
+      <div class="svc-icon"><i class="fa-solid fa-plug"></i></div>
+      <div class="svc-title">Elektronik Lainnya</div>
+      <p class="svc-desc">Kompor listrik, setrika, kipas angin, dispenser, microwave, dan berbagai perangkat rumah tangga lainnya.</p>
+      <span class="svc-price">Mulai Rp 50.000</span>
+    </div>
+  </div>
+</section>
+
+<!-- KEUNGGULAN -->
+<section class="features" id="keunggulan">
+  <div class="features-wrap">
+    <div class="features-visual">
+      <div class="feat-img-bg">
+        <div class="inner-ring"></div>
+        <div class="inner-ring-2"></div>
+        <div class="center-icon"><i class="fa-solid fa-microchip"></i></div>
+      </div>
+      <div class="feat-badge-wrap right">
+        <div class="feat-badge">
+          <i class="fa-solid fa-shield-halved"></i>
+          <div class="fb-text">
+            <strong>Garansi 90 Hari</strong>
+            <span>Untuk setiap pengerjaan</span>
+          </div>
+        </div>
+        <div class="feat-badge">
+          <i class="fa-solid fa-truck-fast"></i>
+          <div class="fb-text">
+            <strong>Panggilan ke Rumah</strong>
+            <span>Teknisi datang ke lokasi</span>
+          </div>
+        </div>
+      </div>
+      <div class="feat-badge-wrap left">
+        <div class="feat-badge">
+          <i class="fa-solid fa-certificate"></i>
+          <div class="fb-text">
+            <strong>Teknisi Bersertifikat</strong>
+            <span>Terlatih & berpengalaman</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Mengapa Kami?</div>
+      <h2 class="section-title">Keunggulan <span class="accent">Laras Elektro</span></h2>
+      <p class="section-desc" style="margin-bottom: 36px;">Kami berkomitmen memberikan layanan servis terbaik dengan standar tinggi, harga transparan, dan kepuasan pelanggan sebagai prioritas utama.</p>
+      <div class="features-list">
+        <div class="feat-item">
+          <div class="feat-num">01</div>
+          <div>
+            <h4>Teknisi Berpengalaman & Bersertifikat</h4>
+            <p>Semua teknisi kami telah melalui pelatihan intensif dan memiliki sertifikasi resmi dengan pengalaman lebih dari 10 tahun di bidangnya.</p>
+          </div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-num">02</div>
+          <div>
+            <h4>Harga Transparan, Tanpa Biaya Tersembunyi</h4>
+            <p>Estimasi biaya diberikan sebelum pengerjaan dimulai. Tidak ada biaya kejutan — harga sudah termasuk ongkos kerja dan suku cadang.</p>
+          </div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-num">03</div>
+          <div>
+            <h4>Garansi Pengerjaan 90 Hari</h4>
+            <p>Setiap perbaikan dilindungi garansi 90 hari. Jika masalah yang sama kembali muncul, kami perbaiki tanpa biaya tambahan.</p>
+          </div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-num">04</div>
+          <div>
+            <h4>Layanan Panggilan ke Rumah</h4>
+            <p>Tidak perlu repot membawa perangkat berat. Teknisi kami siap datang ke lokasi Anda di area Jakarta dan sekitarnya.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROSES -->
+<section class="process" id="proses">
+  <div class="text-center">
+    <div class="section-label">Cara Kerja</div>
+    <h2 class="section-title">Proses Servis yang <span style="color:var(--sky)">Mudah & Cepat</span></h2>
+    <p class="section-desc">Hanya 4 langkah mudah untuk mendapatkan perangkat elektronik Anda kembali berfungsi dengan sempurna.</p>
+  </div>
+  <div class="process-steps">
+    <div class="step-item">
+      <div class="step-dot">1</div>
+      <div class="step-title">Hubungi Kami</div>
+      <p class="step-desc">Telepon, WhatsApp, atau isi form online. Ceritakan masalah perangkat Anda kepada kami.</p>
+    </div>
+    <div class="step-item">
+      <div class="step-dot">2</div>
+      <div class="step-title">Diagnosa & Estimasi</div>
+      <p class="step-desc">Teknisi melakukan diagnosa dan memberikan estimasi biaya yang transparan sebelum pengerjaan.</p>
+    </div>
+    <div class="step-item">
+      <div class="step-dot">3</div>
+      <div class="step-title">Pengerjaan Profesional</div>
+      <p class="step-desc">Setelah disetujui, teknisi mengerjakan perbaikan dengan suku cadang berkualitas dan standar tinggi.</p>
+    </div>
+    <div class="step-item">
+      <div class="step-dot">4</div>
+      <div class="step-title">Terima & Garansi</div>
+      <p class="step-desc">Perangkat kembali berfungsi sempurna dengan garansi pengerjaan 90 hari untuk ketenangan pikiran Anda.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONI -->
+<section class="testimonials" id="testimoni">
+  <div class="text-center">
+    <div class="section-label">Testimoni</div>
+    <h2 class="section-title">Kata Pelanggan <span class="accent">Kami</span></h2>
+    <p class="section-desc">Kepercayaan pelanggan adalah motivasi terbesar kami untuk terus memberikan layanan terbaik.</p>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"AC saya sudah tidak dingin lebih dari sebulan. Setelah menghubungi Laras Elektro, teknisi datang dalam 1 jam dan AC langsung beres. Harga juga sesuai estimasi, tidak ada biaya tambahan sama sekali!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">SR</div>
+        <div>
+          <div class="testi-name">Sari Rahayu</div>
+          <div class="testi-loc">Karanganyar, Jawa Tengah</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"TV LED saya tiba-tiba mati total. Laras Elektro berhasil memperbaikinya hanya dalam 2 hari. Yang saya suka, mereka menjelaskan kerusakannya dengan detail sebelum mulai bekerja. Profesional sekali!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">BP</div>
+        <div>
+          <div class="testi-name">Budi Prasetyo</div>
+          <div class="testi-loc">Karanganyar, Jawa Tengah</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Mesin cuci saya sudah pakai jasa Laras Elektro 3 kali dan selalu puas! Teknisinya ramah, rapih, dan kerjanya cepat. Garansi 90 harinya benar-benar dipegang — waktu ada masalah lagi langsung ditangani gratis."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">DW</div>
+        <div>
+          <div class="testi-name">Dewi Wulandari</div>
+          <div class="testi-loc">Karanganyar, Jawa Tengah</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <div>
+    <h2>Elektronik Anda Bermasalah?<br><em>Kami Siap Membantu!</em></h2>
+    <p>Hubungi kami sekarang dan dapatkan estimasi gratis dari teknisi berpengalaman kami.</p>
+  </div>
+  <a href="https://wa.me/6282137500519" target="_blank" class="btn-primary">
+    <i class="fa-brands fa-whatsapp"></i> Chat di WhatsApp
+  </a>
+</div>
+
+<!-- KONTAK -->
+<section class="contact" id="kontak">
+  <div class="section-label">Hubungi Kami</div>
+  <h2 class="section-title">Siap Membantu <span class="accent">24/7</span></h2>
+  <div class="contact-wrap">
+    <div class="contact-info">
+      <p style="color:var(--gray);line-height:1.7;margin-bottom:8px;">Jangan ragu untuk menghubungi kami. Tim Laras Elektro siap memberikan solusi terbaik untuk setiap masalah elektronik Anda.</p>
+      <div class="contact-item">
+        <div class="ci-icon"><i class="fa-solid fa-location-dot"></i></div>
+        <div>
+          <div class="ci-label">Alamat Bengkel</div>
+          <div class="ci-value">Babatok, Banjarharjo<br>Kebakkramat, Karanganyar, Jawa Tengah</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="ci-icon"><i class="fa-solid fa-phone"></i></div>
+        <div>
+          <div class="ci-label">Telepon / WhatsApp</div>
+          <div class="ci-value">082-137-500-519</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="ci-icon"><i class="fa-solid fa-envelope"></i></div>
+        <div>
+          <div class="ci-label">Email</div>
+          <div class="ci-value">anggitcs53@gmail.com</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="ci-icon"><i class="fa-solid fa-clock"></i></div>
+        <div>
+          <div class="ci-label">Jam Operasional</div>
+          <div class="ci-value">Senin – Sabtu: 08.00 – 20.00 WIB<br>Minggu: 09.00 – 17.00 WIB</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;margin-bottom:24px;color:var(--navy)">Kirim Pesan ke Kami</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nama Lengkap</label>
+          <input type="text" placeholder="Nama Anda" />
+        </div>
+        <div class="form-group">
+          <label>Nomor HP / WA</label>
+          <input type="tel" placeholder="08xx-xxxx-xxxx" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Jenis Perangkat</label>
+        <select>
+          <option value="">Pilih Perangkat...</option>
+          <option>TV / Televisi</option>
+          <option>AC / Pendingin Ruangan</option>
+          <option>Kulkas / Freezer</option>
+          <option>Mesin Cuci</option>
+          <option>Pompa Air</option>
+          <option>Lainnya</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Lokasi Anda</label>
+        <input type="text" placeholder="Alamat / Area Anda" />
+      </div>
+      <div class="form-group">
+        <label>Ceritakan Kerusakannya</label>
+        <textarea placeholder="Contoh: AC saya tidak dingin dan berbunyi berisik sudah 2 hari..."></textarea>
+      </div>
+      <button class="form-submit" onclick="handleSubmit()">
+        <i class="fa-solid fa-paper-plane"></i>&nbsp; Kirim Pesan Sekarang
+      </button>
+    </div>
+  </div>
+</section>
+
+<div class="map-section">
+  <div class="map-overlay-card">
+    <div class="ci-icon"><i class="fa-solid fa-location-dot"></i></div>
+    <div>
+      <div class="ci-label">Lokasi Bengkel Kami</div>
+      <div class="ci-value">Babatok, Banjarharjo<br>Kebakkramat, Karanganyar, Jawa Tengah</div>
+      <a href="https://maps.app.goo.gl/pyUUyXH1LHf48ijh9" target="_blank">
+        <i class="fa-solid fa-diamond-turn-right"></i> Buka Petunjuk Arah
+      </a>
+    </div>
+  </div>
+  <iframe
+    src="https://www.google.com/maps?q=Laras+Elektro,-7.5298105,110.9328625&z=16&output=embed"
+    allowfullscreen
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+    title="Lokasi Laras Elektro">
+  </iframe>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo" style="text-decoration:none;">
+        <div class="logo-icon"><i class="fa-solid fa-bolt"></i></div>
+        <span style="color:white;font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;">Laras <em style="color:var(--sky);font-style:normal;">Elektro</em></span>
+      </a>
+      <p>Solusi servis elektronik profesional dan terpercaya untuk semua perangkat rumah tangga Anda sejak 2008.</p>
+      <div class="social-links">
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+        <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Layanan</h4>
+      <ul>
+        <li><a href="#">Servis TV</a></li>
+        <li><a href="#">Servis AC</a></li>
+        <li><a href="#">Servis Kulkas</a></li>
+        <li><a href="#">Servis Mesin Cuci</a></li>
+        <li><a href="#">Servis Pompa Air</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Informasi</h4>
+      <ul>
+        <li><a href="#">Tentang Kami</a></li>
+        <li><a href="#">Proses Servis</a></li>
+        <li><a href="#">Kebijakan Garansi</a></li>
+        <li><a href="#">Blog & Tips</a></li>
+        <li><a href="#">Karir</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Kontak</h4>
+      <ul>
+        <li><a href="#">0812-3456-7890</a></li>
+        <li><a href="#">laraselektro@gmail.com</a></li>
+        <li><a href="#">Jakarta Pusat</a></li>
+        <li><a href="#">Senin–Sabtu 08–20</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 <span>Laras Elektro</span>. Semua hak cipta dilindungi.</p>
+    <p>Dibuat dengan <span>♥</span> untuk melayani Anda</p>
+  </div>
+</footer>
+
+<!-- WA FLOAT -->
+<a href="https://wa.me/6282137500519" class="wa-float" target="_blank" aria-label="Chat WhatsApp">
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<script>
+  // Mobile menu toggle
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+    document.getElementById('hamburger').classList.toggle('active');
+    document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
+  }
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const offset = 68;
+        window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (window.scrollY > 60) {
+      nav.style.background = 'rgba(10,36,99,0.99)';
+    } else {
+      nav.style.background = 'rgba(10,36,99,0.96)';
+    }
+  });
+
+  // Scroll reveal animation
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.service-card, .feat-item, .testi-card, .step-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+
+  // Form submit handler - kirim ke WhatsApp
+  function handleSubmit() {
+    const nama = document.getElementById('fNama').value.trim();
+    const hp = document.getElementById('fHp').value.trim();
+    const perangkat = document.getElementById('fPerangkat').value;
+    const lokasi = document.getElementById('fLokasi').value.trim();
+    const pesan = document.getElementById('fPesan').value.trim();
+
+    if (!nama || !hp || !perangkat || !lokasi || !pesan) {
+      alert('Mohon lengkapi semua data terlebih dahulu.');
+      return;
+    }
+
+    const text =
+`Halo Laras Elektro, saya ingin melakukan servis:
+
+Nama: ${nama}
+No. HP/WA: ${hp}
+Jenis Perangkat: ${perangkat}
+Lokasi: ${lokasi}
+Keterangan Kerusakan: ${pesan}`;
+
+    const waNumber = '6282137500519';
+    const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`;
+
+    const btn = document.querySelector('.form-submit');
+    btn.innerHTML = '<i class="fa-solid fa-check"></i>&nbsp; Mengarahkan ke WhatsApp...';
+    btn.style.background = 'linear-gradient(135deg, #2ecc71, #27ae60)';
+
+    window.open(waUrl, '_blank');
+
+    setTimeout(() => {
+      btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i>&nbsp; Kirim Pesan Sekarang';
+      btn.style.background = '';
+    }, 3000);
+  }
+</script>
+</body>
+</html>
