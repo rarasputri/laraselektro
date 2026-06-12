@@ -600,6 +600,45 @@
       box-shadow: 0 10px 28px rgba(21,101,192,0.45);
     }
 
+    /* ── MAPS ── */
+    .map-section {
+      width: 100%; height: 380px;
+      position: relative; overflow: hidden;
+      border-top: 4px solid var(--royal);
+    }
+    .map-section iframe {
+      width: 100%; height: 100%; border: 0; display: block;
+      filter: grayscale(8%) contrast(1.05);
+    }
+    .map-overlay-card {
+      position: absolute; top: 24px; left: 24px; z-index: 2;
+      background: white; border-radius: 14px;
+      padding: 18px 22px; box-shadow: var(--shadow-lg);
+      display: flex; align-items: center; gap: 14px;
+      max-width: 320px;
+    }
+    .map-overlay-card .ci-icon { flex-shrink: 0; }
+    .map-overlay-card .ci-label { font-size: 0.78rem; }
+    .map-overlay-card .ci-value { font-size: 0.88rem; line-height: 1.5; }
+    .map-overlay-card a {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 8px; font-size: 0.78rem; font-weight: 600;
+      color: var(--royal); text-decoration: none;
+    }
+    .map-overlay-card a:hover { color: var(--sky); }
+
+    @media (max-width: 768px) {
+      .map-section { height: 320px; }
+      .map-overlay-card {
+        left: 16px; right: 16px; top: 16px; max-width: 100%;
+        padding: 14px 16px;
+      }
+    }
+    @media (max-width: 480px) {
+      .map-section { height: 280px; }
+      .map-overlay-card { flex-direction: column; align-items: flex-start; gap: 8px; }
+    }
+
     /* ── FOOTER ── */
     footer {
       background: var(--dark);
@@ -681,45 +720,6 @@
       transition: color 0.2s;
     }
     .mobile-menu a:hover { color: var(--sky); }
-
-      /* ── MAPS ── */
-      .map-section {
-      width: 100%; height: 380px;
-      position: relative; overflow: hidden;
-      border-top: 4px solid var(--royal);
-    }
-    .map-section iframe {
-      width: 100%; height: 100%; border: 0; display: block;
-      filter: grayscale(8%) contrast(1.05);
-    }
-    .map-overlay-card {
-      position: absolute; top: 24px; left: 24px; z-index: 2;
-      background: white; border-radius: 14px;
-      padding: 18px 22px; box-shadow: var(--shadow-lg);
-      display: flex; align-items: center; gap: 14px;
-      max-width: 320px;
-    }
-    .map-overlay-card .ci-icon { flex-shrink: 0; }
-    .map-overlay-card .ci-label { font-size: 0.78rem; }
-    .map-overlay-card .ci-value { font-size: 0.88rem; line-height: 1.5; }
-    .map-overlay-card a {
-      display: inline-flex; align-items: center; gap: 6px;
-      margin-top: 8px; font-size: 0.78rem; font-weight: 600;
-      color: var(--royal); text-decoration: none;
-    }
-    .map-overlay-card a:hover { color: var(--sky); }
- 
-    @media (max-width: 768px) {
-      .map-section { height: 320px; }
-      .map-overlay-card {
-        left: 16px; right: 16px; top: 16px; max-width: 100%;
-        padding: 14px 16px;
-      }
-    }
-    @media (max-width: 480px) {
-      .map-section { height: 280px; }
-      .map-overlay-card { flex-direction: column; align-items: flex-start; gap: 8px; }
-    }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
@@ -935,7 +935,7 @@
       <div class="svc-icon"><i class="fa-solid fa-tv"></i></div>
       <div class="svc-title">Servis Televisi</div>
       <p class="svc-desc">LED, LCD, OLED, Smart TV semua merek. Penggantian panel, backlight, mainboard, dan kerusakan gambar lainnya.</p>
-      <span class="svc-price">Mulai Rp 50.000</span>
+      <span class="svc-price">Mulai Rp 150.000</span>
     </div>
     <div class="service-card">
       <div class="svc-icon"><i class="fa-solid fa-snowflake"></i></div>
@@ -947,19 +947,19 @@
       <div class="svc-icon"><i class="fa-solid fa-temperature-low"></i></div>
       <div class="svc-title">Servis Kulkas</div>
       <p class="svc-desc">Kulkas tidak dingin, bocor, berbunyi, ganti thermostat, kompresor, atau kerusakan freezer.</p>
-      <span class="svc-price">Mulai Rp 60.000</span>
+      <span class="svc-price">Mulai Rp 100.000</span>
     </div>
     <div class="service-card">
       <div class="svc-icon"><i class="fa-solid fa-rotate"></i></div>
       <div class="svc-title">Servis Mesin Cuci</div>
       <p class="svc-desc">Mesin cuci tidak berputar, bocor, tidak menguras, ganti timer, motor, atau PCB.</p>
-      <span class="svc-price">Mulai Rp 70.000</span>
+      <span class="svc-price">Mulai Rp 100.000</span>
     </div>
     <div class="service-card">
       <div class="svc-icon"><i class="fa-solid fa-bolt"></i></div>
       <div class="svc-title">Servis Pompa Air</div>
       <p class="svc-desc">Pompa air tidak naik, tidak bertenaga, ganti dinamo, kapasitor, atau perbaikan instalasi pipa.</p>
-      <span class="svc-price">Mulai Rp 80.000</span>
+      <span class="svc-price">Mulai Rp 120.000</span>
     </div>
     <div class="service-card">
       <div class="svc-icon"><i class="fa-solid fa-plug"></i></div>
@@ -1090,7 +1090,7 @@
         <div class="testi-avatar">SR</div>
         <div>
           <div class="testi-name">Sari Rahayu</div>
-          <div class="testi-loc">Karanganyar, Jawa Tengah</div>
+          <div class="testi-loc">Depok, Jawa Barat</div>
         </div>
       </div>
     </div>
@@ -1101,7 +1101,7 @@
         <div class="testi-avatar">BP</div>
         <div>
           <div class="testi-name">Budi Prasetyo</div>
-          <div class="testi-loc">Karanganyar, Jawa Tengah</div>
+          <div class="testi-loc">Jakarta Selatan</div>
         </div>
       </div>
     </div>
@@ -1112,7 +1112,7 @@
         <div class="testi-avatar">DW</div>
         <div>
           <div class="testi-name">Dewi Wulandari</div>
-          <div class="testi-loc">Karanganyar, Jawa Tengah</div>
+          <div class="testi-loc">Bekasi, Jawa Barat</div>
         </div>
       </div>
     </div>
@@ -1172,16 +1172,16 @@
       <div class="form-row">
         <div class="form-group">
           <label>Nama Lengkap</label>
-          <input type="text" placeholder="Nama Anda" />
+          <input type="text" id="fNama" placeholder="Nama Anda" />
         </div>
         <div class="form-group">
           <label>Nomor HP / WA</label>
-          <input type="tel" placeholder="08xx-xxxx-xxxx" />
+          <input type="tel" id="fHp" placeholder="08xx-xxxx-xxxx" />
         </div>
       </div>
       <div class="form-group">
         <label>Jenis Perangkat</label>
-        <select>
+        <select id="fPerangkat">
           <option value="">Pilih Perangkat...</option>
           <option>TV / Televisi</option>
           <option>AC / Pendingin Ruangan</option>
@@ -1193,11 +1193,11 @@
       </div>
       <div class="form-group">
         <label>Lokasi Anda</label>
-        <input type="text" placeholder="Alamat / Area Anda" />
+        <input type="text" id="fLokasi" placeholder="Alamat / Area Anda" />
       </div>
       <div class="form-group">
         <label>Ceritakan Kerusakannya</label>
-        <textarea placeholder="Contoh: AC saya tidak dingin dan berbunyi berisik sudah 2 hari..."></textarea>
+        <textarea id="fPesan" placeholder="Contoh: AC saya tidak dingin dan berbunyi berisik sudah 2 hari..."></textarea>
       </div>
       <button class="form-submit" onclick="handleSubmit()">
         <i class="fa-solid fa-paper-plane"></i>&nbsp; Kirim Pesan Sekarang
@@ -1206,6 +1206,7 @@
   </div>
 </section>
 
+<!-- MAPS -->
 <div class="map-section">
   <div class="map-overlay-card">
     <div class="ci-icon"><i class="fa-solid fa-location-dot"></i></div>
@@ -1279,7 +1280,7 @@
 </footer>
 
 <!-- WA FLOAT -->
-<a href="https://wa.me/6282137500519" class="wa-float" target="_blank" aria-label="Chat WhatsApp">
+<a href="https://wa.me/6281234567890" class="wa-float" target="_blank" aria-label="Chat WhatsApp">
   <i class="fa-brands fa-whatsapp"></i>
 </a>
 
@@ -1352,7 +1353,7 @@ Jenis Perangkat: ${perangkat}
 Lokasi: ${lokasi}
 Keterangan Kerusakan: ${pesan}`;
 
-    const waNumber = '6282137500519';
+    const waNumber = '6281234567890';
     const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`;
 
     const btn = document.querySelector('.form-submit');
